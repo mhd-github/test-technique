@@ -18,4 +18,15 @@ class IndexController extends AbstractController
             'articles' => $articleRepository->findAll(),
         ]);
     }
+    /**
+     * @Route("/show/{slug}", name="show_article")
+     */
+
+    public function show($slug, ArticleRepository $articleRepository){
+        $article = $articleRepository->findOneBySlug($slug);
+
+        return $this->render('showArticle.html.twig',[
+            'article'=>$article
+        ]);
+    }
 }

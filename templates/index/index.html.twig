@@ -15,7 +15,7 @@
                             </h3>
                             <div class="mb-1 text-muted">{{article.dateDeCreation |date('M Y')}}</div>
                             <p class="card-text mb-auto" >{{article.texte}} </p>
-                            <a href="article.html">Continue reading</a>
+                            <a href="{{path('show_article',{'slug':article.slug})}}">Continue reading</a>
                         </div>
                         <img class="card-img-right flex-auto d-none d-md-block" src="{{article.photo}}"
                             alt="Card image cap">
