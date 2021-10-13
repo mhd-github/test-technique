@@ -17,7 +17,7 @@
                             <p class="card-text mb-auto" >{{article.texte}} </p>
                             <a href="{{path('show_article',{'slug':article.slug})}}">Continue reading</a>
                         </div>
-                        <img class="card-img-right flex-auto d-none d-md-block" src="{{article.photo}}"
+                        <img class="card-img-right flex-auto d-none d-md-block" style="width: 200px;height:250px"src="{{asset('photos/'~ article.photo)}}"
                             alt="Card image cap">
                     </div>
                 </div>

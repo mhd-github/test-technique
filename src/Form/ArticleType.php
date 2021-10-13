@@ -15,12 +15,8 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('dateDeCreation',DateType::class,[
-                'widget' => 'single_text',
-            ])
             ->add('texte')
-            ->add('photo')
-            ->add('slug')
+            ->add('photo',FileType::class)
         ;
     }
 

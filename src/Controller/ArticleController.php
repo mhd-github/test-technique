@@ -36,6 +36,15 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $image = $form['photo']->getData();
+            $nomImage = md5(uniqid()).'.'.$image->getClientOriginalExtension();
+            $newUrl = $image->move(
+                $this->getParameter('photos_directory'),
+                $nomImage
+            );
+            $article->setPhoto($nomImage);
+            $article->setDateDeCreation(new \DateTime('now'));
             $entityManager->persist($article);
             $entityManager->flush();
 

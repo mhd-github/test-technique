@@ -17,8 +17,8 @@ class AppFixtures extends Fixture
 
             $article->setTitre($faker->sentence(3))
                     ->setDateDeCreation($faker->dateTime())
-                    ->setTexte($faker->text())
-                    ->setPhoto($faker->imageUrl(200, 250,'animals', true));
+                    ->setTexte($faker->text(150))
+                    ->setPhoto("350x150.png");
             $manager->persist($article);
         }
         $manager->flush();
