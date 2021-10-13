@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Article
 {
@@ -41,8 +43,18 @@ class Article
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
-
-
+    /**
+     * Initialiser slug
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     */
+    public function initialiserSlug(){
+        if(empty($this->slug)){
+            $slug = new Slugify;
+            $this->slug = $slug->slugify($this->titre);
+        }
+    }
     public function getId(): ?int
     {
         return $this->id;

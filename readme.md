@@ -11,3 +11,7 @@ Vous vouvez vérifier les pré-requis avec la commande suivante:
 symfony check:requirements
 ``
 
+### generer des fausses données 
+
+php bin/console doctrine:fixtures:load
+

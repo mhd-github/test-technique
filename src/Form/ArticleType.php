@@ -6,6 +6,8 @@ use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ArticleType extends AbstractType
 {
@@ -13,7 +15,9 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('dateDeCreation')
+            ->add('dateDeCreation',DateType::class,[
+                'widget' => 'single_text',
+            ])
             ->add('texte')
             ->add('photo')
             ->add('slug')
