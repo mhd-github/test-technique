@@ -30,7 +30,7 @@
         {% block body %}{% endblock %}    
     </body> 
     <footer class="blog-footer">
-        <p>Test technique par BOUKELA MOHAMED (c) 2021</p>
+        <p>Test technique par BOUKELA MOHAMED (c) {{date('now')|date('Y')}}</p>
     </footer>
     {% block javascripts %}
         {% endblock %}
