@@ -25,7 +25,7 @@
                         <td>{{ article.texte }}</td>
                         <td>{{ article.photo }}</td>
                         <td>{{ article.slug }}</td>
-                        <td>
+                        <td class="col-1">
                             <a class="btn btn-primary" style=" width: 71px;" href="{{ path('article_show', {'id': article.id}) }}">show</a>
                             <a class="btn btn-success" style=" width: 71px;" href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
                             {{ include('article/_delete_form.html.twig') }}

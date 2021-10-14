@@ -15,7 +15,7 @@ class AppFixtures extends Fixture
             $faker = Factory::create('fr_FR');
             $article = new Article();
 
-            $article->setTitre($faker->sentence(3))
+            $article->setTitre($faker->words(3, true))
                     ->setDateDeCreation($faker->dateTime())
                     ->setTexte($faker->text(150))
                     ->setPhoto("350x150.png");

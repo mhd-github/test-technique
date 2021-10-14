@@ -16,7 +16,9 @@ class ArticleType extends AbstractType
         $builder
             ->add('titre')
             ->add('texte')
-            ->add('photo',FileType::class)
+            ->add('photo',FileType::class,[
+                'mapped'=>false
+            ])
         ;
     }
 

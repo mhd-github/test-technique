@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(
- *  fields={"titre"},
+ *  fields={"titre","slug"},
  *  message="un autre article possède ce titre"
  * )
  */

@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/admin")
@@ -71,11 +72,21 @@ class ArticleController extends AbstractController
      * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Article $article): Response
-    {
+    {   
+        $article->setPhoto(
+            new File($this->getParameter('photos_directory') . '\\' . $article->getPhoto())
+        );
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form['photo']->getData();
+            $nomImage = md5(uniqid()).'.'.$image->getClientOriginalExtension();
+            $newUrl = $image->move(
+                $this->getParameter('photos_directory'),
+                $nomImage
+            );
+            $article->setPhoto($nomImage);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
@@ -94,6 +105,10 @@ class ArticleController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $filename = $this->getParameter('photos_directory') . '\\' . $article->getPhoto();
+            if (file_exists($filename)) {
+                unlink($filename);
+            }
             $entityManager->remove($article);
             $entityManager->flush();
         }
